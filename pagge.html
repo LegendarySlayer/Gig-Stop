@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GigStop - Freelancing Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <div class="background-image"></div>
+        <nav class="navbar">
+            <h1><a href="#">GigStop</a></h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#freelancers">Freelancers</a></li>
+                <li><a href="#tracker">Skill Tracker</a></li>
+                <li><a href="#ai-matching">AI Matching</a></li>
+                <li><a href="#wellness">Wellness</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+        <div class="auth-buttons">
+            <button class="login-btn" onclick="openLoginModal()">Login</button>
+            <button class="signup-btn" onclick="openSignupModal()">Sign Up</button>
+        </div>
+        
+    </nav>
+</header>
+
+<!-- Add the login and sign-up modal code at the end of your body -->
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('loginModal')">&times;</span>
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="loginEmail">Email:</label>
+            <input type="email" id="loginEmail" required>
+            <label for="loginPassword">Password:</label>
+            <input type="password" id="loginPassword" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signupModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('signupModal')">&times;</span>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="userType">Sign up as:</label>
+            <select id="userType" required>
+                <option value="jobSeeker">Job Seeker</option>
+                <option value="jobGiver">Job Giver</option>
+            </select>
+            <label for="signupEmail">Email:</label>
+            <input type="email" id="signupEmail" required>
+            <label for="signupPassword">Password:</label>
+            <input type="password" id="signupPassword" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+    </header>
+
+    <!-- Search Bar -->
+    <section class="search-bar">
+        <input type="text" id="search-input" placeholder="Search for projects, freelancers, etc.">
+        <button onclick="search()">Search</button>
+    </section>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>GigStop</h2>
+            <ul>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Create Post</a></li>
+                <li><a href="#">Saved</a></li>
+                <li><a href="#">Create Community</a></li>
+            </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Hero Section -->
+            <section id="home" class="hero-section">
+                <div class="hero-content">
+                    <h2>Find Verified, Skilled Freelancers in Seconds</h2>
+                    <p>Our platform uses AI to match you with top freelancers and ensure transparency with blockchain technology.</p>
+                    <a href="#ai-matching" class="cta-button">Try AI Matching</a>
+                </div>
+            </section>
+
+            <!-- Profile & KYC Section -->
+            <div class="profile-section">
+                <div class="profile-card">
+                    <h3>User Profile</h3>
+                    <p>Profile Completion:</p>
+                    <div class="progress-bar">
+                        <div class="progress-bar-inner"></div>
+                    </div>
+                </div>
+
+                <div class="profile-card kyc-prompt">
+                    <span>KYC Not Completed</span>
+                    <button id="kyc-button">Complete KYC</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions">
+                <button>Create New Post</button>
+                <button>Save Post</button>
+                <button>Create a Community</button>
+            </div>
+
+            <!-- Projects Section -->
+            <section id="projects" class="projects-section">
+                <h2>Available Projects</h2>
+                <div class="project-list">
+                    <div class="project-card">
+                        <h3>Mobile App Development</h3>
+                        <p>Estimated Budget: ₹1,00,000 - ₹1,50,000</p>
+                        <button class="apply-button">Apply Now</button>
+                    </div>
+                    <div class="ai-estimator">
+                        <h3>AI Project Estimator</h3>
+                        <input type="text" id="project-details" placeholder="Enter project details">
+                        <br>
+                        <br>
+                        <button class="estimate-button" onclick="estimateProject()">Estimate Cost</button>
+                        <p id="estimate-result"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Freelancer Section -->
+            <section id="freelancers" class="freelancers-section">
+                <h2>Top Verified Freelancers</h2>
+                <div class="freelancer-list">
+                    <div class="freelancer-card">
+                        <h3>John Doe</h3>
+                        <p>Skills: Full-Stack Web Development, JavaScript</p>
+                        <span class="verified-badge">Verified</span>
+                        <button class="hire-button">Hire Me</button>
+                    </div>
+                </div>
+            </section>
+
+            <!--  -->
+            <!-- Freelancer Profile and Portfolio Management Section -->
+<section id="profile-management" class="profile-management-section">
+    <h2>Freelancer Profile & Portfolio Management</h2>
+    <div class="profile-management-content">
+        <div class="profile-overview">
+            <h3>Your Profile</h3>
+            <p>Manage your personal details, update your skills, and showcase your work experience.</p>
+            <button onclick="editProfile()">Edit Profile</button>
+        </div>
+        <div class="portfolio-management">
+            <h3>Your Portfolio</h3>
+            <p>Display your best work and achievements to attract potential clients.</p>
+            <button onclick="addPortfolioItem()">Add Portfolio Item</button>
+            <div class="portfolio-items">
+                <!-- Portfolio items will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!--  -->
+
+            <!-- Skill Tracker Section -->
+            <section id="tracker" class="skill-tracker-section">
+                <h2>Skill Evolution Tracker</h2>
+                <p>Track the progress and growth of freelancers' skills over time.</p>
+    <!--  -->
+                <div style="width: 100%; height: 400px;">
+                    <canvas id="skillChart"></canvas>
+                </div>
+                
+            </section>
+
+
+            <!--  -->
+            <!--  -->
+            <!-- Post Section with Image and Comments -->
+<section id="community-posts" class="community-posts-section">
+    <h2>Community Posts & Job Openings</h2>
+    <div class="post-list">
+        <!-- Post Example 1 with Image and Comments -->
+        <div class="post-card">
+            <div class="post-header">
+                <h3>React Developer Needed</h3>
+                <p>Posted by XYZ Corp</p>
+            </div>
+            <div class="post-image">
+                <img src="opening.png" alt="React Developer Job Opening">
+            </div>
+            <p class="post-description">We are looking for a React developer with 3+ years of experience to work on a 6-month project.</p>
+            <div class="post-actions">
+                <button class="apply-button">Apply</button>
+                <button class="share-button">Share</button>
+                <div class="vote-buttons">
+                    <button class="upvote-button">Upvote</button>
+                    <span class="vote-count">20</span>
+                    <button class="downvote-button">Downvote</button>
+                </div>
+            </div>
+            <div class="post-comments">
+                <h4>Comments</h4>
+                <div class="comment-list">
+                    <p><strong>User1:</strong> This sounds like a great opportunity!</p>
+                    <p><strong>User2:</strong> Is this a remote position?</p>
+                </div>
+                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                <button class="comment-submit-button">Post Comment</button>
+            </div>
+        </div>
+
+        <!-- Post Example 2 with Image and Comments -->
+        <div class="post-card">
+            <div class="post-header">
+                <h3>Discussion: Best Freelance Tools</h3>
+                <p>Posted by Freelancer Community</p>
+            </div>
+            <div class="post-image">
+                <img src="tools.png" alt="Freelance Tools Discussion">
+            </div>
+            <p class="post-description">What tools do you find the most helpful as a freelancer? Share your thoughts below.</p>
+            <div class="post-actions">
+                <button class="comment-button">Comment</button>
+                <button class="share-button">Share</button>
+                <div class="vote-buttons">
+                    <button class="upvote-button">Upvote</button>
+                    <span class="vote-count">15</span>
+                    <button class="downvote-button">Downvote</button>
+                </div>
+            </div>
+            <div class="post-comments">
+                <h4>Comments</h4>
+                <div class="comment-list">
+                    <p><strong>User3:</strong> I highly recommend using Trello and Notion!</p>
+                </div>
+                <textarea class="comment-input" placeholder="Add a comment..."></textarea>
+                <button class="comment-submit-button">Post Comment</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+            <!--  -->
+            <!--  -->
+
+            <!-- AI Matching Section -->
+            <section id="ai-matching" class="ai-matching-section">
+                <h2>AI Powered Freelancer Matching</h2>
+                <div class="ai-matching-content">
+                    <input type="text" id="project-input" placeholder="Describe your project">
+                    <br>
+                    <br>
+                    <button onclick="matchFreelancers()">Find Freelancers</button>
+                    <p id="match-result"></p>
+                </div>
+            </section>
+
+            <!-- Wellness Section -->
+
+            <!--  -->
+            <section id="wellness" class="wellness-section">
+                <h2>Freelancer Wellness Program</h2>
+                <p>Stay healthy and productive with our wellness programs. Track your progress and access resources for a balanced work-life.</p>
+                
+                <!-- Wellness Dashboard -->
+                <div class="wellness-dashboard">
+                    <h3>Wellness Dashboard</h3>
+                    <div class="wellness-tools">
+                        <button onclick="startMeditation()">Start Meditation</button>
+                        <button onclick="logMood()">Log Mood</button>
+                    </div>
+                    <p id="wellness-status">Feeling good today? Log your mood or take a break!</p>
+                </div>
+                
+                <!-- Resources Section -->
+                <div class="wellness-resources">
+                    <h4>Wellness Resources</h4>
+                    <ul>
+                        <li><a href="https://calm.com" target="_blank">Calm: Meditation & Relaxation</a></li>
+                        <li><a href="https://www.headspace.com/" target="_blank">Headspace: Mindfulness & Meditation</a></li>
+                        <li><a href="https://www.fitnessblender.com/" target="_blank">Fitness Blender: Workouts at Home</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!--  -->
+            <div class="mood-tracking">
+                <h4>Log Your Mood</h4>
+                <label for="mood">How are you feeling today?</label>
+                <select id="mood">
+                    <option value="happy">Happy</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="stressed">Stressed</option>
+                </select>
+                <button onclick="submitMood()">Submit Mood</button>
+            </div>
+            
+            <script>
+                function submitMood() {
+                    const mood = document.getElementById('mood').value;
+                    alert(`Mood logged: ${mood}. Thank you for taking care of your wellness!`);
+                }
+            </script>
+            <!--  -->
+
+            <!-- About Section -->
+            <section id="about" class="about-section">
+                <h2>About GigStop</h2>
+                <div class="about-image">
+                    <img src="backimg.jpg" alt="About GigStop">
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>GigStop is committed to revolutionizing the freelancing landscape in India. Our platform connects skilled freelancers with businesses through innovative AI-driven solutions and blockchain technology. We aim to provide transparency, efficiency, and a seamless user experience for both freelancers and businesses.</p>
+                        <p>Founded by a team of industry experts, GigStop is designed to address the unique challenges of freelancing, from finding the right job to ensuring fair payments. Our mission is to empower freelancers and help businesses find top talent with ease.</p>
+                    </div>
+                   
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="contact-section">
+                <h2>Contact Us</h2>
+                <form action="#" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+
+            <!-- Feed Section -->
+           
+
+    <footer>
+        <p>&copy; 2024 GigStop. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+
+
+
+    <script>
+        // JavaScript to handle KYC button click
+        document.getElementById('kyc-button').addEventListener('click', function () {
+            alert('Redirecting to KYC completion page...');
+        });
+
+        // JavaScript to enhance the sidebar
+        document.querySelectorAll('.sidebar ul li a').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                alert(`You clicked on ${link.textContent}`);
+            });
+        });
+
+        // JavaScript to handle search
+        function search() {
+            const query = document.getElementById('search-input').value;
+            alert(`Searching for: ${query}`);
+        }
+    </script>
+    <!-- Chatbot Widget -->
+<div class="chatbot-container">
+    <div class="chatbot-button" onclick="toggleChatbox()">
+        <span>Chat</span>
+    </div>
+    <div class="chatbot-chatbox" id="chatbox">
+        <div class="chatbot-header">Chat with us</div>
+        <div class="chatbot-messages" id="messages">
+            <!-- Messages will go here -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" placeholder="Type a message..." id="messageInput">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
